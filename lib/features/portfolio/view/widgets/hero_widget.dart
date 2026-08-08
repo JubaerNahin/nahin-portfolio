@@ -602,13 +602,13 @@ class HeroWidget extends StatelessWidget {
                     icon: Icons.code_rounded,
                     label: "GitHub",
                     color: const Color(0xFF1E293B),
-                    url: "https://github.com/jubaernahin17",
+                    url: "https://github.com/JubaerNahin",
                   ),
                   _buildAppIcon(
                     icon: Icons.business_center_rounded,
                     label: "LinkedIn",
                     color: const Color(0xFF0077B5),
-                    url: "https://linkedin.com",
+                    url: "https://linkedin.com/in/jubaerislamnahin",
                   ),
                   _buildAppIcon(
                     icon: Icons.chat_bubble_outline_rounded,
@@ -626,7 +626,7 @@ class HeroWidget extends StatelessWidget {
                     icon: Icons.facebook_rounded,
                     label: "Facebook",
                     color: const Color(0xFF1877F2),
-                    url: "https://facebook.com",
+                    url: "https://www.facebook.com/jubaer.islam.nahin.2024",
                   ),
                   _buildAppIcon(
                     icon: Icons.camera_alt_outlined,
@@ -637,7 +637,8 @@ class HeroWidget extends StatelessWidget {
                       const Color(0xFFFD1D1D),
                       const Color(0xFFF56040),
                     ],
-                    url: "https://instagram.com",
+                    url:
+                        "https://www.instagram.com/_nahin_17?igsh=cGE1OWVmNzc0Z2tv",
                   ),
                   // Swipe indicator App Hint icon
                   _buildSwipeHintAppIcon(accentColor),
@@ -817,8 +818,8 @@ class HeroWidget extends StatelessWidget {
               "mailto:jubaernahin17@gmail.com"),
           _buildDockIcon(Icons.message_rounded, const Color(0xFF30D158),
               "https://wa.me/8801978581747"),
-          _buildDockIcon(Icons.language_rounded, const Color(0xFF00C7BE),
-              "https://github.com/jubaernahin17"),
+          // _buildDockIcon(Icons.language_rounded, const Color(0xFF00C7BE),
+          //     "https://github.com/jubaernahin17"),
         ],
       ),
     );

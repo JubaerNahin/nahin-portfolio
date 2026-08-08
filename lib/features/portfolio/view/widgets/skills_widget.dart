@@ -11,21 +11,23 @@ class SkillsWidget extends StatelessWidget {
 
   final List<Map<String, dynamic>> coreFrameworks = [
     {"name": "Flutter", "level": 0.95},
-    {"name": "Dart", "level": 0.95},
     {"name": "GetX", "level": 0.92},
-    {"name": "BLoC / Provider", "level": 0.85},
+    {"name": "Provider", "level": 0.85},
     {"name": "Feature-First Architecture", "level": 0.90},
+    {"name": "REST APIs", "level": 0.92},
+    {"name": "WebSockets (Pusher)", "level": 0.88},
   ];
 
-  final List<Map<String, dynamic>> apisDatabases = [
-    {"name": "REST APIs", "level": 0.92},
-    {"name": "Firebase / Firestore", "level": 0.88},
-    {"name": "Node.js / Express", "level": 0.75},
-    {"name": "MongoDB / PostgreSQL", "level": 0.78},
-    {"name": "WebSockets (Pusher)", "level": 0.82},
+  final List<Map<String, dynamic>> programmingLanguages = [
+    {"name": "Dart", "level": 0.95},
+    {"name": "C", "level": 0.80},
+    {"name": "C++", "level": 0.82},
+    {"name": "Java", "level": 0.85},
+    {"name": "Python", "level": 0.78},
   ];
 
   final List<Map<String, dynamic>> integrations = [
+    {"name": "Firebase / Firestore", "level": 0.88},
     {"name": "Gemini AI (LLM)", "level": 0.90},
     {"name": "Stripe Payments", "level": 0.85},
     {"name": "RevenueCat Subscriptions", "level": 0.82},
@@ -81,8 +83,8 @@ class SkillsWidget extends StatelessWidget {
             ),
             children: [
               _buildSkillCategory("Core Frameworks", coreFrameworks, 0),
-              _buildSkillCategory("APIs & Backend", apisDatabases, 1),
-              _buildSkillCategory("Integrations", integrations, 2),
+              _buildSkillCategory("Languages", programmingLanguages, 1),
+              _buildSkillCategory("Integrations & Cloud", integrations, 2),
               _buildSkillCategory("Tools & Stores", toolsDeployment, 3),
             ],
           ),
@@ -122,7 +124,8 @@ class SkillsWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildSkillCategory(String title, List<Map<String, dynamic>> skills, int groupIndex) {
+  Widget _buildSkillCategory(
+      String title, List<Map<String, dynamic>> skills, int groupIndex) {
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFF0B0F19),
@@ -152,14 +155,18 @@ class SkillsWidget extends StatelessWidget {
             child: ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               itemCount: skills.length,
+              padding: EdgeInsets.zero,
+              primary: false,
               itemBuilder: (context, idx) {
                 final skill = skills[idx];
                 final skillId = groupIndex * 10 + idx;
 
                 return Obx(() {
-                  final isHovered = controller.hoveredSkillIndex.value == skillId;
+                  final isHovered =
+                      controller.hoveredSkillIndex.value == skillId;
                   return MouseRegion(
-                    onEnter: (_) => controller.hoveredSkillIndex.value = skillId,
+                    onEnter: (_) =>
+                        controller.hoveredSkillIndex.value = skillId,
                     onExit: (_) => controller.hoveredSkillIndex.value = -1,
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 14.0),
@@ -208,18 +215,30 @@ class SkillsWidget extends StatelessWidget {
                               AnimatedContainer(
                                 duration: const Duration(milliseconds: 400),
                                 height: 5.0,
-                                width: (skill["level"] as double) * (MediaQuery.of(context).size.width / (ResponsiveHelper.isMobile(context) ? 1.5 : 5.0) - 40.0),
+                                width: (skill["level"] as double) *
+                                    (MediaQuery.of(context).size.width /
+                                            (ResponsiveHelper.isMobile(context)
+                                                ? 1.5
+                                                : 5.0) -
+                                        40.0),
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: isHovered
-                                        ? [const Color(0xFF2DD4BF), const Color(0xFF6366F1)]
-                                        : [const Color(0xFF3B82F6), const Color(0xFF2DD4BF)],
+                                        ? [
+                                            const Color(0xFF2DD4BF),
+                                            const Color(0xFF6366F1)
+                                          ]
+                                        : [
+                                            const Color(0xFF3B82F6),
+                                            const Color(0xFF2DD4BF)
+                                          ],
                                   ),
                                   borderRadius: BorderRadius.circular(2.5),
                                   boxShadow: isHovered
                                       ? [
                                           BoxShadow(
-                                            color: const Color(0xFF2DD4BF).withValues(alpha: 0.4),
+                                            color: const Color(0xFF2DD4BF)
+                                                .withValues(alpha: 0.4),
                                             blurRadius: 4.0,
                                             spreadRadius: 0.5,
                                           )
