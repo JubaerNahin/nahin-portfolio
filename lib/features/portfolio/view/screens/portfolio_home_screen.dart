@@ -45,55 +45,58 @@ class PortfolioHomeScreen extends GetView<PortfolioController> {
   }
 
   Widget _buildMobileDrawer(BuildContext context) {
-    return Drawer(
-      backgroundColor: const Color(0xFF0F172A),
-      child: Container(
-        decoration: const BoxDecoration(
-          border:
-              Border(left: BorderSide(color: Color(0xFF1E293B), width: 1.0)),
-        ),
-        child: Column(
-          children: [
-            // Drawer Header
-            Container(
-              height: 100.h,
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              alignment: Alignment.centerLeft,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Jubaer Islam Nahin",
-                    style: AppTextStyle.style(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
+    return SafeArea(
+      child: Drawer(
+        backgroundColor: const Color(0xFF0F172A),
+        child: Container(
+          decoration: const BoxDecoration(
+            border:
+                Border(left: BorderSide(color: Color(0xFF1E293B), width: 1.0)),
+          ),
+          child: Column(
+            children: [
+              // Drawer Header
+              Container(
+                height: 100.h,
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Jubaer Islam Nahin",
+                      style: AppTextStyle.style(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close,
-                        color: Colors.white, size: 24.0),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ],
+                    IconButton(
+                      icon: const Icon(Icons.close,
+                          color: Colors.white, size: 24.0),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const Divider(color: Color(0xFF1E293B), height: 1.0),
+              const Divider(color: Color(0xFF1E293B), height: 1.0),
 
-            // Drawer Items
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.all(16.0),
-                children: [
-                  _buildDrawerItem(context, 'Home', controller.homeKey),
-                  _buildDrawerItem(context, 'About', controller.aboutKey),
-                  _buildDrawerItem(context, 'Skills', controller.skillsKey),
-                  _buildDrawerItem(context, 'Projects', controller.projectsKey),
-                  _buildDrawerItem(context, 'Contact', controller.contactKey),
-                ],
+              // Drawer Items
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.all(16.0),
+                  children: [
+                    _buildDrawerItem(context, 'Home', controller.homeKey),
+                    _buildDrawerItem(context, 'About', controller.aboutKey),
+                    _buildDrawerItem(context, 'Skills', controller.skillsKey),
+                    _buildDrawerItem(
+                        context, 'Projects', controller.projectsKey),
+                    _buildDrawerItem(context, 'Contact', controller.contactKey),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

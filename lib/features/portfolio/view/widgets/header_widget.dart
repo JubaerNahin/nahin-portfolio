@@ -18,131 +18,134 @@ class HeaderWidget extends StatelessWidget implements PreferredSizeWidget {
     final isMobile = ResponsiveHelper.isMobile(context);
     final isTablet = ResponsiveHelper.isTablet(context);
 
-    return ClipRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
-        child: Container(
-          height: 80.0,
-          decoration: BoxDecoration(
-            color: const Color(0xFF0F172A).withValues(alpha: 0.75),
-            border: const Border(
-              bottom: BorderSide(color: Color(0xFF1E293B), width: 1.0),
+    return SafeArea(
+      child: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
+          child: Container(
+            height: 80.0,
+            decoration: BoxDecoration(
+              color: const Color(0xFF0F172A).withValues(alpha: 0.75),
+              border: const Border(
+                bottom: BorderSide(color: Color(0xFF1E293B), width: 1.0),
+              ),
             ),
-          ),
-          padding: EdgeInsets.symmetric(
-            horizontal: ResponsiveHelper.responsiveSize(
-              context,
-              mobile: 16.0,
-              tablet: 32.0,
-              desktop: 80.0,
+            padding: EdgeInsets.symmetric(
+              horizontal: ResponsiveHelper.responsiveSize(
+                context,
+                mobile: 16.0,
+                tablet: 32.0,
+                desktop: 80.0,
+              ),
             ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Logo/Brand Name
-              GestureDetector(
-                onTap: () =>
-                    controller.scrollToSection(controller.homeKey, 'Home'),
-                child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12.0, vertical: 8.0),
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFF2DD4BF), Color(0xFF6366F1)],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color(0xFF2DD4BF)
-                                  .withValues(alpha: 0.3),
-                              blurRadius: 10.0,
-                              spreadRadius: 1.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Logo/Brand Name
+                GestureDetector(
+                  onTap: () =>
+                      controller.scrollToSection(controller.homeKey, 'Home'),
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12.0, vertical: 8.0),
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [Color(0xFF2DD4BF), Color(0xFF6366F1)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
                             ),
-                          ],
+                            borderRadius: BorderRadius.circular(8.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color(0xFF2DD4BF)
+                                    .withValues(alpha: 0.3),
+                                blurRadius: 10.0,
+                                spreadRadius: 1.0,
+                              ),
+                            ],
+                          ),
+                          child: Text(
+                            "N",
+                            style: AppTextStyle.style(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
-                        child: Text(
-                          "N",
+                        const SizedBox(width: 12.0),
+                        Text(
+                          "Jubaer Islam Nahin",
                           style: AppTextStyle.style(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.w900,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w700,
                             color: Colors.white,
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 12.0),
-                      Text(
-                        "Jubaer Islam Nahin",
-                        style: AppTextStyle.style(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
+                      ],
+                    ),
+                  ),
+                ),
+
+                // Navigation Links
+                if (!isMobile && !isTablet)
+                  Row(
+                    children: [
+                      _buildNavLink('Home', controller.homeKey),
+                      _buildNavLink('About', controller.aboutKey),
+                      _buildNavLink('Skills', controller.skillsKey),
+                      _buildNavLink('Projects', controller.projectsKey),
+                      _buildNavLink('Contact', controller.contactKey),
+                      const SizedBox(width: 24.0),
+                      // Hire Me CTA Button
+                      ElevatedButton(
+                        onPressed: () => controller.scrollToSection(
+                            controller.contactKey, 'Contact'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF2DD4BF),
+                          foregroundColor: const Color(0xFF0F172A),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24.0, vertical: 16.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          elevation: 0.0,
+                        ).copyWith(
+                          overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                            (Set<WidgetState> states) {
+                              if (states.contains(WidgetState.hovered)) {
+                                return const Color(0xFF14B8A6);
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        child: Text(
+                          "Hire Me",
+                          style: AppTextStyle.style(
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w600,
+                            color: const Color(0xFF0F172A),
+                          ),
                         ),
                       ),
                     ],
+                  )
+                else
+                  // Menu trigger for Mobile/Tablet
+                  IconButton(
+                    icon:
+                        const Icon(Icons.menu, color: Colors.white, size: 28.0),
+                    onPressed: () {
+                      Scaffold.of(context).openEndDrawer();
+                    },
                   ),
-                ),
-              ),
-
-              // Navigation Links
-              if (!isMobile && !isTablet)
-                Row(
-                  children: [
-                    _buildNavLink('Home', controller.homeKey),
-                    _buildNavLink('About', controller.aboutKey),
-                    _buildNavLink('Skills', controller.skillsKey),
-                    _buildNavLink('Projects', controller.projectsKey),
-                    _buildNavLink('Contact', controller.contactKey),
-                    const SizedBox(width: 24.0),
-                    // Hire Me CTA Button
-                    ElevatedButton(
-                      onPressed: () => controller.scrollToSection(
-                          controller.contactKey, 'Contact'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF2DD4BF),
-                        foregroundColor: const Color(0xFF0F172A),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 24.0, vertical: 16.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        elevation: 0.0,
-                      ).copyWith(
-                        overlayColor: WidgetStateProperty.resolveWith<Color?>(
-                          (Set<WidgetState> states) {
-                            if (states.contains(WidgetState.hovered)) {
-                              return const Color(0xFF14B8A6);
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      child: Text(
-                        "Hire Me",
-                        style: AppTextStyle.style(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w600,
-                          color: const Color(0xFF0F172A),
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              else
-                // Menu trigger for Mobile/Tablet
-                IconButton(
-                  icon: const Icon(Icons.menu, color: Colors.white, size: 28.0),
-                  onPressed: () {
-                    Scaffold.of(context).openEndDrawer();
-                  },
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
