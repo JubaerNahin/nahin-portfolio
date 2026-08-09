@@ -32,17 +32,115 @@
 
   <title>nahin_portfolio</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Google Fonts for premium typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #030712;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    #loading-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at center, #0b0f19 0%, #030712 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'Outfit', sans-serif;
+    }
+    #loading-indicator.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .loading-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .loader-circle {
+      position: relative;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 20%, #2dd4bf 60%, #6366f1 100%);
+      animation: rotate 1s linear infinite;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(45, 212, 191, 0.15), 0 0 40px rgba(99, 102, 241, 0.1);
+    }
+    .loader-circle::before {
+      content: '';
+      position: absolute;
+      width: 62px;
+      height: 62px;
+      background: #030712;
+      border-radius: 50%;
+    }
+    .loading-text {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #ffffff 0%, #a5f3fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      animation: pulseText 2s ease-in-out infinite;
+    }
+    .loading-subtext {
+      color: #64748b;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes pulseText {
+      0%, 100% {
+        opacity: 0.7;
+      }
+      50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 8px rgba(45, 212, 191, 0.4));
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
+  <!-- Custom premium splash screen loader -->
+  <div id="loading-indicator">
+    <div class="loading-wrapper">
+      <div class="loader-circle"></div>
+      <div class="loading-text">Jubaer Nahin</div>
+      <div class="loading-subtext">Loading Portfolio</div>
+    </div>
+  </div>
 
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
   <script src="flutter_bootstrap.js" async></script>
 </body>
 
