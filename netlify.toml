@@ -1,3 +1,6 @@
 [build]
-  command = "flutter build web"
+  command = "git clone https://github.com/flutter/flutter.git --depth 1 -b stable $HOME/flutter && $HOME/flutter/bin/flutter build web --release --base-href /"
   publish = "build/web"
+
+[build.environment]
+  PATH = "/opt/buildhome/.pub-cache/bin:/opt/buildhome/flutter/bin:$PATH"
