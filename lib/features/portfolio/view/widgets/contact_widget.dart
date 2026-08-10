@@ -125,7 +125,8 @@ class ContactWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoItem(IconData icon, String title, String subtitle, {required VoidCallback onTap}) {
+  Widget _buildInfoItem(IconData icon, String title, String subtitle,
+      {required VoidCallback onTap}) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
@@ -255,8 +256,9 @@ class ContactWidget extends StatelessWidget {
                 width: double.infinity,
                 height: 52.0,
                 child: ElevatedButton(
-                  onPressed:
-                      loading ? null : () => controller.submitContactForm(),
+                  onPressed: loading
+                      ? null
+                      : () => controller.submitContactForm(context),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2DD4BF),
                     foregroundColor: const Color(0xFF030712),

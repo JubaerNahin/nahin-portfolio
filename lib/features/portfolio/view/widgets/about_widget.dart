@@ -47,7 +47,7 @@ class AboutWidget extends StatelessWidget {
                     _buildStatsGrid(context),
                   ],
                 ),
-          
+
           const SizedBox(height: 48.0),
           _buildEducationAndExperience(context),
         ],
@@ -69,7 +69,7 @@ class AboutWidget extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         Text(
-          "My Journey & Credentials",
+          "My Journey",
           style: AppTextStyle.style(
             fontSize: 28.0,
             fontWeight: FontWeight.w700,
@@ -204,7 +204,8 @@ class AboutWidget extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Icon(Icons.work_outline_rounded, color: Color(0xFF2DD4BF), size: 24.0),
+            const Icon(Icons.work_outline_rounded,
+                color: Color(0xFF2DD4BF), size: 24.0),
             const SizedBox(width: 12.0),
             Text(
               "Professional Experience",
@@ -221,13 +222,15 @@ class AboutWidget extends StatelessWidget {
           role: "Executive Flutter Developer",
           company: "Softvence Alpha",
           period: "Nov 2025 - Present",
-          description: "Developed and maintained production-ready Flutter applications using Feature-First Architecture and GetX. Integrated Pusher WebSockets, RevenueCat, Stripe payments, and Google Maps API.",
+          description:
+              "Developed and maintained production-ready Flutter applications using Feature-First Architecture and GetX. Integrated Pusher WebSockets, RevenueCat, Stripe payments, and Google Maps API.",
         ),
         _buildTimelineItem(
           role: "Flutter Developer Intern",
           company: "Marfah Technologies (Remote)",
           period: "June 2025 - July 2025",
-          description: "Worked on Flutter web & mobile products in Agile sprints, managing Firebase databases, clean UI development, and version control (Git).",
+          description:
+              "Worked on Flutter web & mobile products in Agile sprints, managing Firebase databases, clean UI development, and version control (Git).",
         ),
       ],
     );
@@ -305,7 +308,8 @@ class AboutWidget extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Icon(Icons.school_outlined, color: Color(0xFF2DD4BF), size: 24.0),
+            const Icon(Icons.school_outlined,
+                color: Color(0xFF2DD4BF), size: 24.0),
             const SizedBox(width: 12.0),
             Text(
               "Education",
@@ -391,7 +395,8 @@ class AboutWidget extends StatelessWidget {
         const SizedBox(height: 32.0),
         Row(
           children: [
-            const Icon(Icons.workspace_premium_outlined, color: Color(0xFF2DD4BF), size: 24.0),
+            const Icon(Icons.workspace_premium_outlined,
+                color: Color(0xFF2DD4BF), size: 24.0),
             const SizedBox(width: 12.0),
             Text(
               "Key Achievements",
@@ -416,12 +421,14 @@ class AboutWidget extends StatelessWidget {
             children: [
               _buildAchievementItem(
                 title: "Finalist - Bizz Case Battle 2023",
-                desc: "Competed and emerged as a finalist in the prestigious business case study competition.",
+                desc:
+                    "Competed and emerged as a finalist in the prestigious business case study competition.",
               ),
               const Divider(color: Color(0xFF1E293B), height: 24.0),
               _buildAchievementItem(
                 title: "Participant - DIU-SWE Programming Contest",
-                desc: "Participated in the software engineering department intra programming contest.",
+                desc:
+                    "Participated in the software engineering department intra programming contest.",
               ),
             ],
           ),

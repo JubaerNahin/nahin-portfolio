@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart' as dio_pkg;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -101,7 +102,7 @@ class PortfolioController extends GetxController {
   }
 
   // Handle Contact Form Submission
-  Future<void> submitContactForm() async {
+  Future<void> submitContactForm(BuildContext context) async {
     if (!contactFormKey.currentState!.validate()) {
       return;
     }
@@ -109,33 +110,70 @@ class PortfolioController extends GetxController {
     isSending.value = true;
     sendSuccess.value = false;
 
-    // Simulate sending message to backend
-    await Future.delayed(const Duration(seconds: 2));
+    try {
+      final dio = dio_pkg.Dio();
+      final response = await dio.post(
+        'https://api.emailjs.com/api/v1.0/email/send',
+        options: dio_pkg.Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'origin': 'http://localhost',
+          },
+        ),
+        data: {
+          'service_id': 'service_mie09bo',
+          'template_id': 'template_e9av3rm',
+          'user_id': 'K1xz65k3pST86uzYY',
+          'template_params': {
+            'from_name': nameController.text.trim(),
+            'from_email': emailController.text.trim(),
+            'name': nameController.text.trim(),
+            'email': emailController.text.trim(),
+            'reply_to': emailController.text.trim(),
+            'message': messageController.text.trim(),
+          },
+        },
+      );
 
-    isSending.value = false;
-    sendSuccess.value = true;
+      debugPrint('EmailJS response: ${response.statusCode} - ${response.data}');
 
-    // Clear fields
-    nameController.clear();
-    emailController.clear();
-    messageController.clear();
+      if (response.statusCode == 200) {
+        sendSuccess.value = true;
 
-    // Show success alert
-    Get.snackbar(
-      'Message Sent!',
-      'Thank you for reaching out. Nahin will get back to you soon!',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: const Color(0xFF0F2B2B),
-      colorText: const Color(0xFF2DD4BF),
-      borderRadius: 8,
-      margin: const EdgeInsets.all(16),
-      duration: const Duration(seconds: 4),
-      icon: const Icon(Icons.check_circle, color: Color(0xFF2DD4BF)),
-    );
+        nameController.clear();
+        emailController.clear();
+        messageController.clear();
 
-    // Reset success after 3 seconds
-    Future.delayed(const Duration(seconds: 3), () {
-      sendSuccess.value = false;
-    });
+        Get.snackbar(
+          'Message Sent!',
+          'Thank you for reaching out. Nahin will get back to you soon!',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: const Color(0xFF0F2B2B),
+          colorText: const Color(0xFF2DD4BF),
+          borderRadius: 8,
+          margin: const EdgeInsets.all(16),
+          duration: const Duration(seconds: 4),
+          icon: const Icon(Icons.check_circle, color: Color(0xFF2DD4BF)),
+        );
+      } else {
+        throw Exception('Server returned ${response.statusCode}');
+      }
+    } catch (e) {
+      debugPrint('ERROR sending email: $e');
+
+      Get.snackbar(
+        'Failed',
+        'Could not send message. Please try again.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: const Color(0xFF2B0F0F),
+        colorText: const Color(0xFFF87171),
+        borderRadius: 8,
+        margin: const EdgeInsets.all(16),
+        duration: const Duration(seconds: 4),
+        icon: const Icon(Icons.error_outline, color: Color(0xFFF87171)),
+      );
+    } finally {
+      isSending.value = false;
+    }
   }
 }

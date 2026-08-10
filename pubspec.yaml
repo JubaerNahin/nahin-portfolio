@@ -58,6 +58,7 @@ dependencies:
 
 
   file_picker: ^10.1.9
+  emailjs: ^4.0.0
 #  gantt_view: ^0.1.4
 
 
