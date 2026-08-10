@@ -15,7 +15,7 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <base href="/nahin-portfolio/">
+  <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -45,6 +45,7 @@
       padding: 0;
       overflow: hidden;
     }
+
     #loading-indicator {
       position: fixed;
       top: 0;
@@ -61,16 +62,19 @@
       transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       font-family: 'Outfit', sans-serif;
     }
+
     #loading-indicator.fade-out {
       opacity: 0;
       visibility: hidden;
     }
+
     .loading-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
+
     .loader-circle {
       position: relative;
       width: 70px;
@@ -84,6 +88,7 @@
       justify-content: center;
       box-shadow: 0 0 20px rgba(45, 212, 191, 0.15), 0 0 40px rgba(99, 102, 241, 0.1);
     }
+
     .loader-circle::before {
       content: '';
       position: absolute;
@@ -92,6 +97,7 @@
       background: #030712;
       border-radius: 50%;
     }
+
     .loading-text {
       color: #ffffff;
       font-size: 24px;
@@ -104,6 +110,7 @@
       text-transform: uppercase;
       animation: pulseText 2s ease-in-out infinite;
     }
+
     .loading-subtext {
       color: #64748b;
       font-size: 13px;
@@ -111,18 +118,24 @@
       letter-spacing: 1.5px;
       text-transform: uppercase;
     }
+
     @keyframes rotate {
       0% {
         transform: rotate(0deg);
       }
+
       100% {
         transform: rotate(360deg);
       }
     }
+
     @keyframes pulseText {
-      0%, 100% {
+
+      0%,
+      100% {
         opacity: 0.7;
       }
+
       50% {
         opacity: 1;
         filter: drop-shadow(0 0 8px rgba(45, 212, 191, 0.4));
