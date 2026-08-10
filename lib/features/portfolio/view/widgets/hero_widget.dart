@@ -20,7 +20,7 @@ class HeroWidget extends StatelessWidget {
       "glow": const Color(0xFF6366F1),
       "gradient": [const Color(0xFF0F172A), const Color(0xFF1E1B4B)],
       "codeColor": const Color(0xFF34D399),
-      "colorCircle": const Color(0xFF2DD4BF),
+      "colorCircle": const Color(0xFF1E1B4B),
     },
     {
       "name": "Emerald & Mint",
@@ -34,7 +34,7 @@ class HeroWidget extends StatelessWidget {
       "name": "Sunset Orange",
       "accent": const Color(0xFFF97316),
       "glow": const Color(0xFFEA580C),
-      "gradient": [const Color(0xFF450A0A), const Color(0xFF1E0707)],
+      "gradient": [const Color(0xFFF97316), const Color(0xFF441f0f)],
       "codeColor": const Color(0xFFF43F5E),
       "colorCircle": const Color(0xFFF97316),
     },
@@ -42,7 +42,7 @@ class HeroWidget extends StatelessWidget {
       "name": "Orchid Violet",
       "accent": const Color(0xFFD946EF),
       "glow": const Color(0xFF9333EA),
-      "gradient": [const Color(0xFF3B0764), const Color(0xFF1E1B4B)],
+      "gradient": [const Color(0xFFD946EF), const Color(0xFF1E1B4B)],
       "codeColor": const Color(0xFFA855F7),
       "colorCircle": const Color(0xFFD946EF),
     },
@@ -163,7 +163,8 @@ class HeroWidget extends StatelessWidget {
           texts: const [
             "Flutter Developer",
             "Problem Solver",
-            "AI Integrator",
+            "Clam Under Pressure",
+            "Fast Learner",
           ],
           style: AppTextStyle.style(
             fontSize: ResponsiveHelper.responsiveSize(context,
