@@ -51,13 +51,73 @@ class SkillsWidget extends StatelessWidget {
       tablet: 40.0,
       desktop: 80.0,
     );
+    final isMobile = ResponsiveHelper.isMobile(context);
     final isTablet = ResponsiveHelper.isTablet(context);
 
-    int crossAxisCount = 4;
-    if (ResponsiveHelper.isMobile(context)) {
-      crossAxisCount = 1;
+    Widget content;
+    if (isMobile) {
+      content = Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _buildSkillCategory("Core Frameworks", coreFrameworks, 0),
+          const SizedBox(height: 24.0),
+          _buildSkillCategory("Languages", programmingLanguages, 1),
+          const SizedBox(height: 24.0),
+          _buildSkillCategory("Integrations & Cloud", integrations, 2),
+          const SizedBox(height: 24.0),
+          _buildSkillCategory("Tools & Stores", toolsDeployment, 3),
+        ],
+      );
     } else if (isTablet) {
-      crossAxisCount = 2;
+      content = Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                  child: _buildSkillCategory(
+                      "Core Frameworks", coreFrameworks, 0)),
+              const SizedBox(width: 24.0),
+              Expanded(
+                  child: _buildSkillCategory(
+                      "Languages", programmingLanguages, 1)),
+            ],
+          ),
+          const SizedBox(height: 24.0),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                  child: _buildSkillCategory(
+                      "Integrations & Cloud", integrations, 2)),
+              const SizedBox(width: 24.0),
+              Expanded(
+                  child: _buildSkillCategory(
+                      "Tools & Stores", toolsDeployment, 3)),
+            ],
+          ),
+        ],
+      );
+    } else {
+      content = Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+              child:
+                  _buildSkillCategory("Core Frameworks", coreFrameworks, 0)),
+          const SizedBox(width: 24.0),
+          Expanded(
+              child:
+                  _buildSkillCategory("Languages", programmingLanguages, 1)),
+          const SizedBox(width: 24.0),
+          Expanded(
+              child: _buildSkillCategory(
+                  "Integrations & Cloud", integrations, 2)),
+          const SizedBox(width: 24.0),
+          Expanded(
+              child: _buildSkillCategory("Tools & Stores", toolsDeployment, 3)),
+        ],
+      );
     }
 
     return Container(
@@ -69,25 +129,7 @@ class SkillsWidget extends StatelessWidget {
         children: [
           _buildHeading(),
           const SizedBox(height: 48.0),
-          GridView.count(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: crossAxisCount,
-            crossAxisSpacing: 24.0,
-            mainAxisSpacing: 24.0,
-            childAspectRatio: ResponsiveHelper.responsiveSize(
-              context,
-              mobile: 0.95,
-              tablet: 0.85,
-              desktop: 0.72,
-            ),
-            children: [
-              _buildSkillCategory("Core Frameworks", coreFrameworks, 0),
-              _buildSkillCategory("Languages", programmingLanguages, 1),
-              _buildSkillCategory("Integrations & Cloud", integrations, 2),
-              _buildSkillCategory("Tools & Stores", toolsDeployment, 3),
-            ],
-          ),
+          content,
         ],
       ),
     );
@@ -141,6 +183,7 @@ class SkillsWidget extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             title,
@@ -151,76 +194,69 @@ class SkillsWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20.0),
-          Expanded(
-            child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: skills.length,
-              padding: EdgeInsets.zero,
-              primary: false,
-              itemBuilder: (context, idx) {
-                final skill = skills[idx];
-                final skillId = groupIndex * 10 + idx;
+          Column(
+            children: skills.asMap().entries.map((entry) {
+              final idx = entry.key;
+              final skill = entry.value;
+              final skillId = groupIndex * 10 + idx;
+              final isLast = idx == skills.length - 1;
 
-                return Obx(() {
-                  final isHovered =
-                      controller.hoveredSkillIndex.value == skillId;
-                  return MouseRegion(
-                    onEnter: (_) =>
-                        controller.hoveredSkillIndex.value = skillId,
-                    onExit: (_) => controller.hoveredSkillIndex.value = -1,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 14.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  skill["name"],
-                                  overflow: TextOverflow.ellipsis,
-                                  style: AppTextStyle.style(
-                                    fontSize: 13.0,
-                                    fontWeight: FontWeight.w600,
-                                    color: isHovered
-                                        ? const Color(0xFF2DD4BF)
-                                        : const Color(0xFFE2E8F0),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(
-                                "${(skill["level"] * 100).toInt()}%",
+              return Obx(() {
+                final isHovered =
+                    controller.hoveredSkillIndex.value == skillId;
+                return MouseRegion(
+                  onEnter: (_) =>
+                      controller.hoveredSkillIndex.value = skillId,
+                  onExit: (_) => controller.hoveredSkillIndex.value = -1,
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: isLast ? 0.0 : 14.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                skill["name"],
+                                overflow: TextOverflow.ellipsis,
                                 style: AppTextStyle.style(
-                                  fontSize: 12.0,
+                                  fontSize: 13.0,
                                   fontWeight: FontWeight.w600,
                                   color: isHovered
                                       ? const Color(0xFF2DD4BF)
-                                      : const Color(0xFF64748B),
+                                      : const Color(0xFFE2E8F0),
                                 ),
                               ),
-                            ],
-                          ),
-                          const SizedBox(height: 6.0),
-                          Stack(
-                            children: [
-                              Container(
-                                height: 5.0,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF1E293B),
-                                  borderRadius: BorderRadius.circular(2.5),
-                                ),
+                            ),
+                            const SizedBox(width: 8.0),
+                            Text(
+                              "${(skill["level"] * 100).toInt()}%",
+                              style: AppTextStyle.style(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.w600,
+                                color: isHovered
+                                    ? const Color(0xFF2DD4BF)
+                                    : const Color(0xFF64748B),
                               ),
-                              AnimatedContainer(
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 6.0),
+                        Stack(
+                          children: [
+                            Container(
+                              height: 5.0,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF1E293B),
+                                borderRadius: BorderRadius.circular(2.5),
+                              ),
+                            ),
+                            FractionallySizedBox(
+                              widthFactor: skill["level"] as double,
+                              child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 400),
                                 height: 5.0,
-                                width: (skill["level"] as double) *
-                                    (MediaQuery.of(context).size.width /
-                                            (ResponsiveHelper.isMobile(context)
-                                                ? 1.5
-                                                : 5.0) -
-                                        40.0),
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: isHovered
@@ -246,15 +282,15 @@ class SkillsWidget extends StatelessWidget {
                                       : [],
                                 ),
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  );
-                });
-              },
-            ),
+                  ),
+                );
+              });
+            }).toList(),
           ),
         ],
       ),
