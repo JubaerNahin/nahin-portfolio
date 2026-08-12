@@ -4,6 +4,7 @@ import 'dart:ui' show PointerDeviceKind;
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../../util/app_images/app_images.dart';
 import '../../../../util/helper/responsive_helper.dart';
 import '../../../../util/text_style/app_text_style.dart';
 import '../../controller/portfolio_controller.dart';
@@ -111,6 +112,10 @@ class HeroWidget extends StatelessWidget {
       crossAxisAlignment:
           isCentered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
+        if (!isCentered) ...[
+          _buildAvatar(context, accentColor),
+          const SizedBox(height: 28.0),
+        ],
         // Welcome tag
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -277,14 +282,17 @@ class HeroWidget extends StatelessWidget {
   }
 
   Widget _buildAvatar(BuildContext context, Color accentColor) {
+    final isMobile = ResponsiveHelper.isMobile(context);
+    final isTablet = ResponsiveHelper.isTablet(context);
     final avatarSize = ResponsiveHelper.responsiveSize(
       context,
       mobile: 180.0,
-      tablet: 240.0,
-      desktop: 280.0,
+      tablet: 220.0,
+      desktop: 160.0,
     );
 
-    return Center(
+    return Align(
+      alignment: (isMobile || isTablet) ? Alignment.center : Alignment.centerLeft,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -304,7 +312,7 @@ class HeroWidget extends StatelessWidget {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: accentColor.withValues(alpha: 0.15),
+                  color: accentColor.withValues(alpha: 0.25),
                   blurRadius: 40.0,
                   spreadRadius: 8.0,
                 ),
@@ -314,19 +322,27 @@ class HeroWidget extends StatelessWidget {
           Container(
             width: avatarSize,
             height: avatarSize,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFF0F172A),
+              color: const Color(0xFF0F172A),
+              border: Border.all(
+                color: accentColor.withValues(alpha: 0.6),
+                width: 3.0,
+              ),
             ),
             child: ClipOval(
-              child: Container(
-                padding: const EdgeInsets.all(24.0),
-                color: const Color(0xFF0F172A),
-                child: Icon(
-                  Icons.laptop_mac_rounded,
-                  size: avatarSize * 0.45,
-                  color: accentColor,
-                ),
+              child: Image.asset(
+                AppImages.jubaerPhoto,
+                width: avatarSize,
+                height: avatarSize,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Icon(
+                    Icons.person_rounded,
+                    size: avatarSize * 0.5,
+                    color: accentColor,
+                  );
+                },
               ),
             ),
           ),

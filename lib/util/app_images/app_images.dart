@@ -5,6 +5,7 @@ class  AppImages{
   /// ========================= Image ====================
   static const String splashLogo = 'assets/images/newSplashLogo.jpg';
   static const String avatar = 'assets/images/avatar.png';
+  static const String jubaerPhoto = 'assets/images/jubaer_photo.png';
   static const String demoOrderImage = 'assets/images/demoOrderImage.png';
   static const String postNowGirl = 'assets/images/postNowGirl.png';
   static const String postNowBg = 'assets/images/postNowBg.png';

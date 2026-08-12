@@ -372,7 +372,7 @@ class AboutWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Cumulative CGPA",
+                    "CGPA",
                     style: AppTextStyle.style(
                       fontSize: 14.0,
                       fontWeight: FontWeight.w600,
