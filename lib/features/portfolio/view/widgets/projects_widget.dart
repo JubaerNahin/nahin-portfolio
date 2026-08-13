@@ -35,7 +35,14 @@ class ProjectsWidget extends StatelessWidget {
       "badge": "Available in App Store & Play Store",
       "desc":
           "Developed and maintained Flutter-based User and Rider applications for Android and iOS. Implemented truck booking, real-time trip tracking, Google Maps, payments, authentication, and push notifications. Integrated Laravel REST APIs and Firebase while optimizing performance and maintaining clean, scalable code.",
-      "tags": ["Flutter", "Android", "iOS", "Google Maps", "Firebase", "Laravel REST API"],
+      "tags": [
+        "Flutter",
+        "Android",
+        "iOS",
+        "Google Maps",
+        "Firebase",
+        "Laravel REST API"
+      ],
       "isMultiApp": true,
       "subApps": [
         {
@@ -49,7 +56,8 @@ class ProjectsWidget extends StatelessWidget {
             {
               "type": "play_store",
               "label": "Play Store",
-              "url": "https://play.google.com/store/apps/details?id=com.andrewngugi.lori.lori"
+              "url":
+                  "https://play.google.com/store/apps/details?id=com.andrewngugi.lori.lori"
             }
           ]
         },
@@ -59,12 +67,14 @@ class ProjectsWidget extends StatelessWidget {
             {
               "type": "app_store",
               "label": "App Store",
-              "url": "https://play.google.com/store/apps/details?id=com.lorimovers.driversapp"
+              "url":
+                  "https://play.google.com/store/apps/details?id=com.lorimovers.driversapp"
             },
             {
               "type": "play_store",
               "label": "Play Store",
-              "url": "https://play.google.com/store/apps/details?id=com.lorimovers.driversapp"
+              "url":
+                  "https://play.google.com/store/apps/details?id=com.lorimovers.driversapp"
             }
           ]
         }
@@ -75,7 +85,14 @@ class ProjectsWidget extends StatelessWidget {
       "badge": "Available in App Store & Play Store",
       "desc":
           "Designed and implemented a Flutter-based grocery shopping application for Android and iOS. Built features including product browsing, search, cart management, secure authentication, checkout, payments, and REST API integration.",
-      "tags": ["Flutter", "Android", "iOS", "E-Commerce", "REST API", "Payments"],
+      "tags": [
+        "Flutter",
+        "Android",
+        "iOS",
+        "E-Commerce",
+        "REST API",
+        "Payments"
+      ],
       "isMultiApp": false,
       "links": [
         {
@@ -95,7 +112,14 @@ class ProjectsWidget extends StatelessWidget {
       "badge": "Available in App Store",
       "desc":
           "Built and enhanced a Flutter-based meditation and wellness application for Android and iOS. Implemented guided meditation, sleep programs, subscription management, authentication, push notifications, and REST API integration.",
-      "tags": ["Flutter", "Android", "iOS", "Meditation", "Subscriptions", "REST API"],
+      "tags": [
+        "Flutter",
+        "Android",
+        "iOS",
+        "Meditation",
+        "Subscriptions",
+        "REST API"
+      ],
       "isMultiApp": false,
       "links": [
         {
@@ -106,11 +130,32 @@ class ProjectsWidget extends StatelessWidget {
       ]
     },
     {
+      "title": "Personal Library App",
+      "badge": "University Course Project",
+      "desc":
+          "This was a university project I developed using Java. It is a web-based library management application primarily focused on implementing CRUD operations for managing library resources. I also implemented the MVC (Model-View-Controller) architecture to ensure a structured and maintainable codebase.",
+      "tags": ["Java", "SpringBoot", "Html", "Css", "Thymeleaf", "REST API"],
+      "isMultiApp": false,
+      "links": [
+        {
+          "type": "github",
+          "label": "GitHub",
+          "url": "https://github.com/JubaerNahin/PersonalLibraryApp"
+        }
+      ]
+    },
+    {
       "title": "SmartShop - AI-Powered E-Commerce App",
-      "badge": "Personal Project",
+      "badge": "Final Year Project",
       "desc":
           "Developed a cross-platform e-commerce application featuring product catalog, shopping cart, checkout, Firebase Authentication, and an AI chatbot powered by Google Gemini. Implemented Prompt Engineering and integrated the Gemini AI API to generate intelligent conversational responses. Built using Flutter, Firebase, and REST APIs following clean and scalable development practices.",
-      "tags": ["Flutter", "Google Gemini AI", "Firebase Auth", "Prompt Engineering", "REST API"],
+      "tags": [
+        "Flutter",
+        "Google Gemini AI",
+        "Firebase Auth",
+        "Prompt Engineering",
+        "REST API"
+      ],
       "isMultiApp": false,
       "links": [
         {
@@ -119,7 +164,7 @@ class ProjectsWidget extends StatelessWidget {
           "url": "https://github.com/JubaerNahin/smartshop"
         }
       ]
-    },
+    }
   ];
 
   Future<void> _launchUrl(String urlString) async {
@@ -174,6 +219,15 @@ class ProjectsWidget extends StatelessWidget {
                 Expanded(child: _buildProjectCard(projects[2], 2, context)),
                 const SizedBox(width: 24.0),
                 Expanded(child: _buildProjectCard(projects[3], 3, context)),
+              ],
+            ),
+          ),
+          const SizedBox(height: 24.0),
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(child: _buildProjectCard(projects[4], 4, context)),
               ],
             ),
           ),
@@ -279,10 +333,12 @@ class ProjectsWidget extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10.0, vertical: 4.0),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF2DD4BF).withValues(alpha: 0.1),
+                            color:
+                                const Color(0xFF2DD4BF).withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(20.0),
                             border: Border.all(
-                              color: const Color(0xFF2DD4BF).withValues(alpha: 0.3),
+                              color: const Color(0xFF2DD4BF)
+                                  .withValues(alpha: 0.3),
                             ),
                           ),
                           child: Text(
@@ -297,7 +353,6 @@ class ProjectsWidget extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 18.0),
-
                   Text(
                     proj["title"],
                     maxLines: 2,
@@ -309,7 +364,6 @@ class ProjectsWidget extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10.0),
-
                   Text(
                     proj["desc"],
                     style: AppTextStyle.style(
@@ -321,16 +375,12 @@ class ProjectsWidget extends StatelessWidget {
                   ),
                 ],
               ),
-
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 20.0),
-
                   _buildLinksSection(proj),
-
                   const SizedBox(height: 16.0),
-
                   Wrap(
                     spacing: 8.0,
                     runSpacing: 8.0,
@@ -452,7 +502,8 @@ class ProjectsWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.0),
           hoverColor: accentColor.withValues(alpha: 0.15),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
             decoration: BoxDecoration(
               color: const Color(0xFF0B0F19),
               borderRadius: BorderRadius.circular(8.0),
